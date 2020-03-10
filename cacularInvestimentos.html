@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Calcular Investimentos</title>
+<style>
+*{
+padding: 0px;
+margin: 0px;
+box-sizing: border-box;
+}
+
+body{
+background-color: rgb(150,200,255);
+}
+
+
+#calculo{
+font-family: arial;
+width: 230px;
+height: 300px;
+text-align: center;
+margin-top: calc(50vh - 150px);
+margin-left: auto;
+margin-right: auto;
+background-color: white;
+padding-top: 75px;
+border-radius: 10px;
+box-shadow: 2px 2px 2px;
+}
+
+#calculo p {
+color: blue;
+font-weight: bold;
+font-size: 20px;
+-webkit-text-stroke-width: 1.1px;
+-webkit-text-stroke-color: #000;
+}
+
+#calculo input[type="text"]{
+height: 23px;
+text-indent: 5px;
+}
+</style>
+</head>
+<body>
+
+<div id="calculo">
+   <p>Simulação de investimentos:</p>
+   <input type="text" name="txtInicial" id="idInicial" placeholder="Valor Inicial"><br>
+   <input type="text" name="txtMensal" id="idMensal" placeholder="Investimento Mensal"><br>
+   <input type="text" name="txtJuros" id="idJuros" placeholder="Taxa de Juros (%)"><br>
+   <input type="text" name="txtMeses" id="idMeses" placeholder="Meses de Investimento"><br>
+   <input type="button" value="Calcular" onclick="calcular()">
+</div>
+</body>
+<script>
+calcular = () => {
+   inicial = eval(document.getElementById('idInicial').value.replace(",","."))
+   mensal = eval(document.getElementById('idMensal').value.replace(",","."))
+   juros = eval(document.getElementById('idJuros').value.replace(",",".")) / 100
+   meses = eval(document.getElementById('idMeses').value.replace(",","."))
+   valor = inicial * (1 + juros)
+   investimento = inicial
+   contador = 2
+
+   while(contador <= meses){
+      valor = (valor + mensal) * (1 + juros)
+      investimento += mensal
+      contador++
+   }
+
+   alert("Você tera um total bruto de: R$" + valor.toFixed(2) + "\n" +
+         "Você investiu: R$" + investimento.toFixed(2) + "\n" +
+         "Você lucrou: R$" + (valor - investimento).toFixed(2))
+}
+</script>
+</html>
